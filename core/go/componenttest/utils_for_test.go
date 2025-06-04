@@ -356,7 +356,9 @@ func initPostgres(t *testing.T, ctx context.Context) (dns string, cleanup func()
 		adminDB, err := sql.Open("postgres", dbDSN("postgres"))
 		if err == nil {
 			_, _ = adminDB.Exec(fmt.Sprintf(`DROP DATABASE "%s" WITH(FORCE);`, componentTestdbName))
-			adminDB.Close()
+			if closeErr := adminDB.Close(); closeErr != nil {
+				log.L(context.Background()).Warnf("Failed to close admin DB connection: %v", closeErr)
+			}
 		}
 	}
 }

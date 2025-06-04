@@ -1579,8 +1579,8 @@ func TestResolveUpdatedTransactionSuccess(t *testing.T) {
 	assert.Equal(t, from.String(), validatedTransaction.Transaction.From)
 	assert.Equal(t, pldapi.TransactionTypePublic.Enum(), validatedTransaction.Transaction.Type)
 	assert.Equal(t, "idempotencyKey", validatedTransaction.Transaction.IdempotencyKey)
-	assert.Equal(t, "set(uint256)", validatedTransaction.ResolvedTransaction.Function.Signature)
-	assert.Equal(t, "0x76458e36bbb1e4f5e5742aa62b3122eb2e4622e19489dd2eb4c7370858085511", validatedTransaction.ResolvedTransaction.Function.ABIReference.HexString0xPrefix())
+	assert.Equal(t, "set(uint256)", validatedTransaction.Function.Signature)
+	assert.Equal(t, "0x76458e36bbb1e4f5e5742aa62b3122eb2e4622e19489dd2eb4c7370858085511", validatedTransaction.Function.ABIReference.HexString0xPrefix())
 	assert.Equal(t, `{"value":"46"}`, validatedTransaction.Transaction.Data.String())
 	assert.Equal(t, "60fe47b1000000000000000000000000000000000000000000000000000000000000002e", hex.EncodeToString(validatedTransaction.PublicTxData))
 }

@@ -225,10 +225,10 @@ func mapDirectlyToInternalPrivateTX(psc components.DomainSmartContract, inTx *pl
 // Very simplified version of the real logic in TX manager
 func (tb *testbed) resolveFunction(invocation *pldapi.TransactionInput) (*abi.Entry, error) {
 	if invocation.ABIReference != nil {
-		return nil, fmt.Errorf("Testbed does not support ABIReference")
+		return nil, fmt.Errorf("testbed does not support ABIReference")
 	}
 	if invocation.ABI == nil {
-		return nil, fmt.Errorf("Testbed requires ABI to be passed in on each call")
+		return nil, fmt.Errorf("testbed requires ABI to be passed in on each call")
 	}
 	for _, entry := range invocation.ABI {
 		if entry.Name == invocation.Function {
@@ -238,7 +238,7 @@ func (tb *testbed) resolveFunction(invocation *pldapi.TransactionInput) (*abi.En
 	if invocation.Function == "" && len(invocation.ABI) == 1 {
 		return invocation.ABI[0], nil
 	}
-	return nil, fmt.Errorf("Could not find function '%s' in provided ABI", invocation.Function)
+	return nil, fmt.Errorf("could not find function '%s' in provided ABI", invocation.Function)
 }
 
 func (tb *testbed) resolveTXSigner(tx *testbedTransaction) error {

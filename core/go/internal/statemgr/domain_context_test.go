@@ -896,7 +896,7 @@ func TestDCMergeUnFlushedWhileFlushingDedup(t *testing.T) {
 	// Simulate the DB having returned us the same state we ask for
 	dc.stateLock.Lock()
 	inTheFlush := dc.flushing.states[0]
-	assert.Equal(t, s1.ID, inTheFlush.State.ID)
+	assert.Equal(t, s1.ID, inTheFlush.ID)
 	dc.stateLock.Unlock()
 
 	states, err := dc.mergeUnFlushedApplyLocks(schema, []*pldapi.State{

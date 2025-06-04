@@ -41,7 +41,7 @@ func buildSelfSignedTLSKeyPair(t *testing.T, subject pkix.Name) (string, string)
 	// Create an X509 certificate pair
 	privatekey, _ := rsa.GenerateKey(rand.Reader, 2048)
 	publickey := &privatekey.PublicKey
-	var privateKeyBytes []byte = x509.MarshalPKCS1PrivateKey(privatekey)
+	var privateKeyBytes = x509.MarshalPKCS1PrivateKey(privatekey)
 	privateKeyBlock := &pem.Block{Type: "RSA PRIVATE KEY", Bytes: privateKeyBytes}
 	privateKeyPEM := &strings.Builder{}
 	err := pem.Encode(privateKeyPEM, privateKeyBlock)
@@ -70,7 +70,7 @@ func buildSelfSignedTLSKeyPairFiles(t *testing.T, subject pkix.Name) (string, st
 	privatekey, err := rsa.GenerateKey(rand.Reader, 2048)
 	require.NoError(t, err)
 	publickey := &privatekey.PublicKey
-	var privateKeyBytes []byte = x509.MarshalPKCS1PrivateKey(privatekey)
+	var privateKeyBytes = x509.MarshalPKCS1PrivateKey(privatekey)
 	tmpDir := t.TempDir()
 	privateKeyFile, _ := os.CreateTemp(tmpDir, "key.pem")
 	privateKeyBlock := &pem.Block{Type: "RSA PRIVATE KEY", Bytes: privateKeyBytes}
